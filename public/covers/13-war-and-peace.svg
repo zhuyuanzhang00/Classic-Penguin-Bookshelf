@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="620" viewBox="0 0 400 620" role="img" aria-labelledby="title">
+  <title id="title">War and Peace — Leo Tolstoy</title>
+  <rect width="400" height="620" fill="#1E3A5F"/>
+  <rect x="18" y="18" width="364" height="584" fill="none" stroke="#F0E6D0" stroke-width="2" opacity="0.55"/>
+  <rect x="0" y="196" width="400" height="228" fill="#F0E6D0"/>
+  <rect x="0" y="196" width="400" height="8" fill="#0B1C2C" opacity="0.85"/>
+  <rect x="0" y="416" width="400" height="8" fill="#0B1C2C" opacity="0.85"/>
+  <text x="200" y="72" text-anchor="middle" fill="#F0E6D0" font-family="Georgia, 'Times New Roman', serif" font-size="11" letter-spacing="5">CLASSICS</text>
+  <text x="200" y="108" text-anchor="middle" fill="#F0E6D0" font-family="Georgia, 'Times New Roman', serif" font-size="15" letter-spacing="3">1869</text>
+  <ellipse cx="200" cy="148" rx="28" ry="34" fill="#F0E6D0" opacity="0.95"/>
+  <ellipse cx="200" cy="156" rx="16" ry="20" fill="#1E3A5F"/>
+  <circle cx="193" cy="146" r="3" fill="#F0E6D0"/>
+  <circle cx="207" cy="146" r="3" fill="#F0E6D0"/>
+  <path d="M188 168 C200 176 212 176 212 168" fill="none" stroke="#F0E6D0" stroke-width="2"/>
+  <text text-anchor="middle" fill="#0B1C2C" font-family="Georgia, 'Times New Roman', serif" font-size="26" font-weight="700"><tspan x="200" dy="278">War and Peace</tspan></text>
+  <text x="200" y="390" text-anchor="middle" fill="#0B1C2C" font-family="Georgia, 'Times New Roman', serif" font-size="13" letter-spacing="1.5">LEO TOLSTOY</text>
+  <text x="200" y="520" text-anchor="middle" fill="#F0E6D0" font-family="Georgia, 'Times New Roman', serif" font-size="12" letter-spacing="3">A SHELF EDITION</text>
+  <text x="200" y="552" text-anchor="middle" fill="#F0E6D0" font-family="Georgia, 'Times New Roman', serif" font-size="11" opacity="0.8">No. 13</text>
+</svg>

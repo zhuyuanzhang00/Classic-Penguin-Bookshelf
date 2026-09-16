@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="620" viewBox="0 0 400 620" role="img" aria-labelledby="title">
+  <title id="title">Around the World in Eighty Days — Jules Verne</title>
+  <rect width="400" height="620" fill="#E85D04"/>
+  <rect x="18" y="18" width="364" height="584" fill="none" stroke="#F7EEDC" stroke-width="2" opacity="0.55"/>
+  <rect x="0" y="196" width="400" height="228" fill="#F7EEDC"/>
+  <rect x="0" y="196" width="400" height="8" fill="#1C140C" opacity="0.85"/>
+  <rect x="0" y="416" width="400" height="8" fill="#1C140C" opacity="0.85"/>
+  <text x="200" y="72" text-anchor="middle" fill="#F7EEDC" font-family="Georgia, 'Times New Roman', serif" font-size="11" letter-spacing="5">CLASSICS</text>
+  <text x="200" y="108" text-anchor="middle" fill="#F7EEDC" font-family="Georgia, 'Times New Roman', serif" font-size="15" letter-spacing="3">1873</text>
+  <ellipse cx="200" cy="148" rx="28" ry="34" fill="#F7EEDC" opacity="0.95"/>
+  <ellipse cx="200" cy="156" rx="16" ry="20" fill="#E85D04"/>
+  <circle cx="193" cy="146" r="3" fill="#F7EEDC"/>
+  <circle cx="207" cy="146" r="3" fill="#F7EEDC"/>
+  <path d="M188 168 C200 176 212 176 212 168" fill="none" stroke="#F7EEDC" stroke-width="2"/>
+  <text text-anchor="middle" fill="#1C140C" font-family="Georgia, 'Times New Roman', serif" font-size="26" font-weight="700"><tspan x="200" dy="267">Around the World</tspan><tspan x="200" dy="28">in Eighty Days</tspan></text>
+  <text x="200" y="390" text-anchor="middle" fill="#1C140C" font-family="Georgia, 'Times New Roman', serif" font-size="13" letter-spacing="1.5">JULES VERNE</text>
+  <text x="200" y="520" text-anchor="middle" fill="#F7EEDC" font-family="Georgia, 'Times New Roman', serif" font-size="12" letter-spacing="3">A SHELF EDITION</text>
+  <text x="200" y="552" text-anchor="middle" fill="#F7EEDC" font-family="Georgia, 'Times New Roman', serif" font-size="11" opacity="0.8">No. 02</text>
+</svg>
