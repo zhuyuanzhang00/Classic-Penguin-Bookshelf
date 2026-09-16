@@ -40,7 +40,7 @@ The workflow in `.github/workflows/deploy-pages.yml` builds the static export an
 - Orbit the wooden case (drag / pinch). Click a spine — or the 2D rail — to **pull the book clear of the case, turn and open it**, then show the detail panel (`/?book=`). Close the panel to **close the covers and slide the book back** into its slot. No teleport; easing is cubic/quart; the volume stays in front of the wood.
 - Detail shows title, author, year, generated cover, imprint-exception, nonfiction, and drama badges when they apply, and the critic rating/review. *Hamlet* and *Journey’s End* are flagged as drama, not novels.
 - **Open book** (in the panel) reveals either a verified public-domain quote with an edition citation, or the failure note `No verified quote sourced yet.`
-- Edit `criticRating` (1–5) and `criticReview` in the panel. On GitHub Pages those two fields persist in **localStorage**. *Journey’s End* ships with no rating and the placeholder `Awaiting Literary Critic.`
+- Edit `criticRating` (1–5) and `criticReview` in the panel. On GitHub Pages those two fields persist in **localStorage**. *Journey’s End* is tagged as drama, like *Hamlet*.
 - `/citations` lists all 35 titles in shelf order with quote status, text, citation, or failure note.
 
 ## Covers and spines

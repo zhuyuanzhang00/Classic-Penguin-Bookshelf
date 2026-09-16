@@ -263,8 +263,9 @@ export const BOOKS_26_34: Book[] = [
     title: "Journey’s End",
     author: "R. C. Sherriff",
     year: "1928",
-    criticRating: null,
-    criticReview: "Awaiting Literary Critic.",
+    criticRating: 5,
+    criticReview:
+      "The great trench play that refuses rhetoric: waiting, whiskey, and the next raid do the moral work. Stanhope and Raleigh still make the war’s waste intimate rather than abstract. Tag as drama like Hamlet; Penguin has issued it — worth the final slot.",
     imprintException: false,
     imprintExceptionNote: null,
     isNonfiction: false,
