@@ -30,11 +30,12 @@ export function SpineRail({ books, selectedId }: SpineRailProps) {
                 backgroundImage: `url(${assetPath(book.coverImageUrl)})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                color: book.palette.spineInk,
+                color: "#ffffff",
+                textShadow: "0 1px 2px rgba(0,0,0,0.7)",
               }}
             >
               <span
-                className="max-h-20 w-full overflow-hidden text-[9px] font-semibold uppercase leading-tight tracking-wide"
+                className="max-h-20 w-full overflow-hidden text-[11px] font-bold uppercase leading-tight tracking-wide"
                 style={{ writingMode: "vertical-rl" }}
               >
                 {book.title}

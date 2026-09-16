@@ -23,7 +23,7 @@ const newsreader = Newsreader({
 export const metadata: Metadata = {
   title: "The Orange Band — a classics shelf",
   description:
-    "A Penguin Classics–style 3D bookshelf: thirty-four titles, live critic notes, and a hard-gated citations page.",
+    "A Penguin Classics–style 3D bookshelf: thirty-five titles, live critic notes, and a hard-gated citations page.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -11,7 +11,7 @@ type ShelfFallbackProps = {
 const rows = [
   [0, 12],
   [12, 24],
-  [24, 34],
+  [24, 35],
 ] as const;
 
 export function ShelfFallback({ books, selectedId }: ShelfFallbackProps) {
@@ -35,21 +35,24 @@ export function ShelfFallback({ books, selectedId }: ShelfFallbackProps) {
                     href={`/?book=${book.id}`}
                     title={`${book.title} — ${book.author}`}
                     className={cn(
-                      "flex origin-bottom items-end justify-center rounded-sm px-1 pb-2 pt-3 text-center transition-transform duration-500 ease-out",
-                      selected ? "-translate-y-5 scale-105 ring-2 ring-[#e34a1c]" : "hover:-translate-y-1",
+                      "flex origin-bottom items-end justify-center rounded-sm px-1 pb-2 pt-3 text-center transition-transform duration-700 ease-out",
+                      selected
+                        ? "-translate-y-10 scale-110 ring-2 ring-[#e34a1c]"
+                        : "hover:-translate-y-1",
                     )}
                     style={{
                       backgroundColor: book.palette.band,
                       backgroundImage: `url(${assetPath(book.coverImageUrl)})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
-                      color: book.palette.spineInk,
+                      color: "#ffffff",
                       height: `${Math.round(70 + book.height * 18)}%`,
-                      width: `${Math.max(18, Math.round(book.thickness * 90))}px`,
+                      width: `${Math.max(20, Math.round(book.thickness * 96))}px`,
+                      textShadow: "0 1px 2px rgba(0,0,0,0.7)",
                     }}
                   >
                     <span
-                      className="max-h-full overflow-hidden text-[9px] font-semibold uppercase leading-tight tracking-wide"
+                      className="max-h-full overflow-hidden text-[11px] font-bold uppercase leading-tight tracking-wide"
                       style={{ writingMode: "vertical-rl" }}
                     >
                       {book.title}

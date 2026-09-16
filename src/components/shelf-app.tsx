@@ -4,6 +4,7 @@ import { BookDetailPanel } from "@/components/book-detail-panel";
 import { ShelfStage } from "@/components/shelf-stage";
 import { SpineRail } from "@/components/spine-rail";
 import { mergeCriticFields, writeCriticPatch } from "@/lib/critic-storage";
+import { OPEN_SEQUENCE_MS } from "@/lib/shelf-case";
 import type { Book, CriticPatch } from "@/types/book";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -36,6 +37,7 @@ function ShelfShell({
 }) {
   const router = useRouter();
   const [books, setBooks] = useState(seed);
+  const [panelRevealed, setPanelRevealed] = useState(false);
   const selected = useMemo(
     () => books.find((book) => book.id === selectedId) ?? null,
     [books, selectedId],
@@ -44,6 +46,16 @@ function ShelfShell({
   useEffect(() => {
     setBooks(mergeCriticFields(seed));
   }, [seed]);
+
+  useEffect(() => {
+    if (selectedId == null) {
+      setPanelRevealed(false);
+      return;
+    }
+    setPanelRevealed(false);
+    const timer = window.setTimeout(() => setPanelRevealed(true), OPEN_SEQUENCE_MS);
+    return () => window.clearTimeout(timer);
+  }, [selectedId]);
 
   function handleSave(id: number, patch: CriticPatch) {
     writeCriticPatch(id, patch);
@@ -62,6 +74,7 @@ function ShelfShell({
           key={selected.id}
           book={selected}
           saved={saved}
+          revealed={panelRevealed}
           onSave={handleSave}
         />
       ) : null}
