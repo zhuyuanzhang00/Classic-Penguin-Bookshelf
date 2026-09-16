@@ -53,8 +53,10 @@ export function ShelfStage({
         <div
           className={
             ready
-              ? "absolute inset-0"
-              : "pointer-events-none invisible absolute inset-0"
+              ? selectedId != null
+                ? "pointer-events-none absolute inset-0 z-0"
+                : "absolute inset-0 z-0"
+              : "pointer-events-none invisible absolute inset-0 z-0"
           }
         >
           <ShelfErrorBoundary
@@ -64,7 +66,10 @@ export function ShelfStage({
               books={books}
               selectedId={selectedId}
               onSelect={(book) => router.push(`/?book=${book.id}`)}
-              onDeselect={() => router.push("/")}
+              onDeselect={() => {
+                if (document.querySelector("[data-book-detail-panel]")) return;
+                router.push("/");
+              }}
               onCreated={() => setReady(true)}
             />
           </ShelfErrorBoundary>
