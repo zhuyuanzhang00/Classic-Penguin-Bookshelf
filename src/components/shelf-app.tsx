@@ -21,12 +21,10 @@ export function ShelfApp({ books: seed }: { books: Book[] }) {
   const selectedId = parseBookId(searchParams.get("book"));
   const saved = searchParams.get("saved") === "1";
   const [books, setBooks] = useState(seed);
-  const [hydrated, setHydrated] = useState(false);
   const [panelId, setPanelId] = useState<number | null>(null);
 
   useEffect(() => {
     setBooks(mergeCriticFields(seed));
-    setHydrated(true);
   }, [seed]);
 
   useEffect(() => {
@@ -54,7 +52,7 @@ export function ShelfApp({ books: seed }: { books: Book[] }) {
     <main className="flex min-h-0 flex-1 flex-col overflow-hidden">
       <ShelfStage books={books} selectedId={selectedId} />
       <SpineRail books={books} selectedId={selectedId} />
-      {selected && hydrated && panelId === selected.id ? (
+      {selected && panelId === selected.id ? (
         <BookDetailPanel
           key={selected.id}
           book={selected}

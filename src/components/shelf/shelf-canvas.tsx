@@ -71,11 +71,15 @@ export default function ShelfCanvas({
 }: ShelfCanvasProps) {
   return (
     <Canvas
-      className="h-full w-full"
+      className="relative z-0 h-full w-full"
+      style={{ zIndex: 0 }}
       camera={{ position: [0, 0.4, 15.2], fov: 32, near: 0.1, far: 60 }}
       dpr={1}
       onCreated={() => onCreated?.()}
-      onPointerMissed={onDeselect}
+      onPointerMissed={() => {
+        if (selectedId != null) return;
+        onDeselect();
+      }}
       gl={{
         antialias: true,
         alpha: false,
