@@ -46,5 +46,8 @@ next-env.d.ts
 # local GitHub Pages path preview
 /pages-preview
 
+# MCP-sized lockfile slices used only if GitHub cannot store the full lockfile
+/lockfile-parts
+
 # search scratch
 /agent-tools

@@ -27,7 +27,33 @@ jobs:
           cache: npm
       - name: Install
         run: |
-          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+          set -euo pipefail
+          assemble_lockfile() {
+            if [ -d lockfile-parts ]; then
+              echo "Assembling package-lock.json from lockfile-parts"
+              cat lockfile-parts/part-* > package-lock.json
+            fi
+          }
+          is_valid_lockfile() {
+            node -e "
+              const fs = require('fs');
+              if (!fs.existsSync('package-lock.json')) process.exit(1);
+              const text = fs.readFileSync('package-lock.json', 'utf8');
+              if (!text.trim() || text.includes('PLACEHOLDER_TOO_LARGE')) process.exit(1);
+              const parsed = JSON.parse(text);
+              if (!parsed.lockfileVersion || !parsed.packages) process.exit(1);
+            "
+          }
+          if ! is_valid_lockfile; then
+            assemble_lockfile
+          fi
+          if is_valid_lockfile; then
+            echo "Using npm ci"
+            npm ci
+          else
+            echo "Lockfile missing or invalid; using npm install"
+            npm install
+          fi
       - name: Build static export
         run: npm run build
         env:
