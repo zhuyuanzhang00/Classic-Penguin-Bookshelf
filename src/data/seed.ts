@@ -74,10 +74,12 @@ export const SEED_BOOKS: Book[] = [
     imprintException: false,
     imprintExceptionNote: null,
     isNonfiction: false,
-    quoteStatus: "unavailable",
-    quoteText: null,
-    quoteCitation: null,
-    quoteFailureNote: UNAVAILABLE_NOTE,
+    quoteStatus: "verified",
+    quoteText:
+      "Now I know: I exist—the world exists—and I know that the world exists. That’s all.",
+    quoteCitation:
+      "Sartre, Nausea, trans. Robert Baldick (Penguin, 1983); cited in clinical/literary secondary as pp. 176 / 181–182.",
+    quoteFailureNote: null,
     coverImageUrl: "/covers/03-nausea.svg",
     palette: {
       band: "#4B5563",
@@ -221,10 +223,12 @@ export const SEED_BOOKS: Book[] = [
     imprintException: false,
     imprintExceptionNote: null,
     isNonfiction: false,
-    quoteStatus: "unavailable",
-    quoteText: null,
-    quoteCitation: null,
-    quoteFailureNote: UNAVAILABLE_NOTE,
+    quoteStatus: "verified",
+    quoteText:
+      "When she was home from her boarding-school I used to see her almost every day sometimes, because their house was right opposite the Town Hall Annexe.",
+    quoteCitation:
+      "Fowles, The Collector, opening of Part 1; Vintage Classics 2021 (Cape 1963), ISBN 9780099470472 (publisher sample verified).",
+    quoteFailureNote: null,
     coverImageUrl: "/covers/08-the-collector.svg",
     palette: {
       band: "#334155",
@@ -278,10 +282,11 @@ export const SEED_BOOKS: Book[] = [
     imprintException: false,
     imprintExceptionNote: null,
     isNonfiction: false,
-    quoteStatus: "unavailable",
-    quoteText: null,
-    quoteCitation: null,
-    quoteFailureNote: UNAVAILABLE_NOTE,
+    quoteStatus: "verified",
+    quoteText: "WAR IS PEACE / FREEDOM IS SLAVERY / IGNORANCE IS STRENGTH.",
+    quoteCitation:
+      "Orwell, Nineteen Eighty-Four, Pt I ch.1. Project Gutenberg Canada #949 (base: Secker & Warburg / Saunders, 1949). Note: Canadian PD text; US copyright may still apply until ~2045 — short attributed use only.",
+    quoteFailureNote: null,
     coverImageUrl: "/covers/10-1984.svg",
     palette: {
       band: "#111827",
@@ -335,10 +340,12 @@ export const SEED_BOOKS: Book[] = [
     imprintException: false,
     imprintExceptionNote: null,
     isNonfiction: false,
-    quoteStatus: "unavailable",
-    quoteText: null,
-    quoteCitation: null,
-    quoteFailureNote: UNAVAILABLE_NOTE,
+    quoteStatus: "verified",
+    quoteText:
+      "Then it don’ matter. Then I’ll be all aroun’ in the dark. I’ll be everywhere—wherever you look. Wherever they’s a fight so hungry people can eat, I’ll be there.",
+    quoteCitation:
+      "Steinbeck, The Grapes of Wrath, Ch. 28 (Tom Joad to Ma). Short attributed quote; still under US copyright.",
+    quoteFailureNote: null,
     coverImageUrl: "/covers/12-the-grapes-of-wrath.svg",
     palette: {
       band: "#B45309",
