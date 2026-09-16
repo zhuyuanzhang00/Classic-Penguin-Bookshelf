@@ -1,6 +1,6 @@
 # The Orange Band
 
-A Penguin Classics–style **3D bookshelf**: seventeen titles in a fixed order, camera controls, a live literary-critic panel, and a hard-gated `/citations` page that never invents quotes.
+A Penguin Classics–style **3D bookshelf**: thirty-four titles in a fixed order, camera controls, a live literary-critic panel, and a hard-gated `/citations` page that never invents quotes.
 
 Live site (GitHub Pages): [https://zhuyuanzhang00.github.io/Classic-Penguin-Bookshelf/](https://zhuyuanzhang00.github.io/Classic-Penguin-Bookshelf/)
 
@@ -38,10 +38,10 @@ The workflow in `.github/workflows/deploy-pages.yml` builds the static export an
 ## What you can do
 
 - Orbit the wooden case (drag / pinch). Click a spine — or the 2D rail on small screens — to **pull the book out**, then open the detail panel (`/?book=`). Close the panel to slide it back into its slot.
-- Detail shows title, author, year, generated cover, imprint-exception and nonfiction badges when they apply, and the critic rating/review.
+- Detail shows title, author, year, generated cover, imprint-exception, nonfiction, and drama badges when they apply, and the critic rating/review. *Hamlet* is flagged as drama, not a novel.
 - **Open book** reveals either a verified public-domain quote with an edition citation, or the failure note `No verified quote sourced yet.`
 - Edit `criticRating` (1–5) and `criticReview` in the panel. On GitHub Pages (and in the static export) those two fields persist in **localStorage** and merge over the seed. They do not sync across browsers or machines.
-- `/citations` lists all 17 titles in shelf order with quote status, text, citation, or failure note.
+- `/citations` lists all 34 titles in shelf order with quote status, text, citation, or failure note.
 
 ## Quote policy
 

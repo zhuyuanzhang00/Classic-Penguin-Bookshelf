@@ -84,6 +84,9 @@ export function BookDetailPanel({
             {book.isNonfiction ? (
               <Badge variant="secondary">Nonfiction — not a novel</Badge>
             ) : null}
+            {book.isDrama ? (
+              <Badge variant="secondary">Drama — not a novel</Badge>
+            ) : null}
             {book.imprintException ? (
               <Badge variant="outline">Imprint exception</Badge>
             ) : null}
