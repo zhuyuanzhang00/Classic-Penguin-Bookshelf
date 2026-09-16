@@ -2,6 +2,7 @@
 
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import * as THREE from "three";
 import { BookMesh } from "@/components/shelf/book-mesh";
 import { Bookcase } from "@/components/shelf/bookcase";
 import { layoutBooks } from "@/lib/shelf-layout";
@@ -24,16 +25,25 @@ function Scene({
 
   return (
     <>
-      <color attach="background" args={["#140c09"]} />
-      <ambientLight intensity={0.62} />
-      <directionalLight position={[4.2, 7.5, 6]} intensity={1.45} color="#ffe4c4" />
-      <directionalLight position={[-5, 2.2, 3.4]} intensity={0.32} color="#ff7a3c" />
-      <spotLight
-        position={[0, 6.5, 7]}
-        angle={0.55}
-        penumbra={0.6}
+      <color attach="background" args={["#2a1c14"]} />
+      <hemisphereLight args={["#fff1dd", "#5a3a24", 0.72]} />
+      <ambientLight intensity={0.95} />
+      <directionalLight
+        position={[4.2, 7.5, 6]}
+        intensity={1.7}
+        color="#fff4e5"
+      />
+      <directionalLight
+        position={[-5, 3.4, 4.2]}
         intensity={0.55}
-        color="#fff1dd"
+        color="#ffc48a"
+      />
+      <spotLight
+        position={[0, 6.8, 8]}
+        angle={0.62}
+        penumbra={0.75}
+        intensity={0.42}
+        color="#fff7ea"
       />
       <Bookcase />
       {placed.map(({ book, position }) => (
@@ -75,7 +85,11 @@ export default function ShelfCanvas({
       style={{ zIndex: 0 }}
       camera={{ position: [0, 0.4, 15.2], fov: 32, near: 0.1, far: 60 }}
       dpr={1}
-      onCreated={() => onCreated?.()}
+      onCreated={(state) => {
+        state.gl.toneMapping = THREE.ACESFilmicToneMapping;
+        state.gl.toneMappingExposure = 1.28;
+        onCreated?.();
+      }}
       onPointerMissed={() => {
         if (selectedId != null) return;
         onDeselect();

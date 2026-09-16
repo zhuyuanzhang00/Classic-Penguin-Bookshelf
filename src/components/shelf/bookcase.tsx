@@ -8,8 +8,8 @@ import { CASE_SCALE, KENNEY_CENTER } from "@/lib/shelf-case";
 import { kenneyBookcaseObjectUrl } from "@/lib/kenney-bookcase-url";
 
 function ProceduralBookcase() {
-  const wood = "#d4a76c";
-  const dark = "#8b5a2b";
+  const wood = "#e4bc88";
+  const dark = "#b07a46";
   const s = CASE_SCALE;
   const cx = KENNEY_CENTER.x;
   const cy = KENNEY_CENTER.y;
@@ -34,7 +34,7 @@ function ProceduralBookcase() {
         scale={s}
       >
         <boxGeometry args={args} />
-        <meshStandardMaterial color={color} roughness={0.72} metalness={0.04} />
+        <meshStandardMaterial color={color} roughness={0.68} metalness={0.03} />
       </mesh>
     );
   }
@@ -79,9 +79,13 @@ function KenneyBookcase() {
     next.traverse((child) => {
       if (child instanceof THREE.Mesh) {
         const material = child.material;
-        if (material && !Array.isArray(material)) {
-          material.roughness = 0.78;
-          material.metalness = 0.05;
+        if (material && !Array.isArray(material) && material instanceof THREE.MeshStandardMaterial) {
+          const nextMat = material.clone();
+          nextMat.color.lerp(new THREE.Color("#f0d2a8"), 0.34);
+          nextMat.roughness = 0.7;
+          nextMat.metalness = 0.03;
+          nextMat.aoMapIntensity = 0.28;
+          child.material = nextMat;
         }
       }
     });
