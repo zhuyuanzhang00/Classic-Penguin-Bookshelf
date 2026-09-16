@@ -1,4 +1,5 @@
 import type { Book } from "@/types/book";
+import { BOOKS_26_34 } from "@/data/books-26-34";
 
 const UNAVAILABLE_NOTE = "No verified quote sourced yet.";
 
@@ -228,4 +229,5 @@ export const BOOKS_18_34: Book[] = [
     thickness: 0.21,
     depth: 0.97,
   },
+  ...BOOKS_26_34,
 ];
