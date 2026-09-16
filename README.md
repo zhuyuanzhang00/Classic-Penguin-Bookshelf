@@ -37,7 +37,7 @@ The workflow in `.github/workflows/deploy-pages.yml` builds the static export an
 
 ## What you can do
 
-- Orbit the wooden case (drag / pinch). Click a spine — or the 2D rail — to **pull the book clear of the case, turn and open it**, then show the detail panel (`/?book=`). Close the panel to **close the covers and slide the book back** into its slot. No teleport; easing is cubic/quart; the volume stays in front of the wood.
+- Orbit the wooden case (drag / pinch). Click a spine to **pull the book clear of the case, turn it toward the camera, and open it on the spine hinge** (front and back covers sit side by side, insides facing you), then show the detail panel (`/?book=`). Close the panel to **close the covers and slide the book back** into its slot. No teleport; easing is cubic/quart; the volume stays in front of the wood.
 - Detail shows title, author, year, generated cover, imprint-exception, nonfiction, and drama badges when they apply, and the critic rating/review. *Hamlet* and *Journey’s End* are flagged as drama, not novels.
 - **Open book** (in the panel) reveals either a verified public-domain quote with an edition citation, or the failure note `No verified quote sourced yet.`
 - Edit `criticRating` (1–5) and `criticReview` in the panel. On GitHub Pages those two fields persist in **localStorage**. *Journey’s End* is tagged as drama, like *Hamlet*.
@@ -45,7 +45,7 @@ The workflow in `.github/workflows/deploy-pages.yml` builds the static export an
 
 ## Covers and spines
 
-Every cover uses the same Penguin-band layout as *The Little Prince*: cream cartouche, oval mark, CLASSICS / year / title / author / A SHELF EDITION. Band color varies per title. Spines are dark cloth with **large white lettering**.
+Every cover uses the same band layout as *The Little Prince* (title 17): top colored band with CLASSICS + year + circular doodle, cream middle with serif title and AUTHOR in caps, bottom colored band with A SHELF EDITION + No. N. Band color varies per title. Titles live on the **3D spines only** — there is no 2D title rail under the shelf. Spines are lifted cloth with **large white lettering**.
 
 ## Quote policy
 
