@@ -2,7 +2,6 @@
 
 import { BookDetailPanel } from "@/components/book-detail-panel";
 import { ShelfStage } from "@/components/shelf-stage";
-import { SpineRail } from "@/components/spine-rail";
 import { mergeCriticFields, writeCriticPatch } from "@/lib/critic-storage";
 import { OPEN_SEQUENCE_MS } from "@/lib/shelf-case";
 import type { Book, CriticPatch } from "@/types/book";
@@ -67,7 +66,6 @@ function ShelfShell({
     <>
       <main className="flex min-h-0 flex-1 flex-col overflow-hidden">
         <ShelfStage books={books} selectedId={selectedId} />
-        <SpineRail books={books} selectedId={selectedId} />
       </main>
       {selected ? (
         <BookDetailPanel
