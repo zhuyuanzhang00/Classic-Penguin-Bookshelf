@@ -14,7 +14,7 @@ export type Book = {
   title: string;
   author: string;
   year: string;
-  criticRating: number;
+  criticRating: number | null;
   criticReview: string;
   imprintException: boolean;
   imprintExceptionNote: string | null;
