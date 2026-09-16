@@ -28,13 +28,14 @@ async function persist(books: Book[]) {
       await fs.mkdir(path.dirname(DATA_PATH), { recursive: true });
       await fs.writeFile(DATA_PATH, JSON.stringify(books, null, 2), "utf8");
     } catch {
-      // Serverless / read-only filesystems keep the in-memory copy for this process.
+      // Read-only filesystems keep the in-memory copy for this process.
     }
   };
   writeQueue = writeQueue.then(task, task);
   await writeQueue;
 }
 
+/** Node JSON store for optional local experiments. The static Pages app does not call this. */
 export async function getBooks(): Promise<Book[]> {
   try {
     const raw = await fs.readFile(DATA_PATH, "utf8");

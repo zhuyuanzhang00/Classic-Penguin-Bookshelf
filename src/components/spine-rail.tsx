@@ -1,3 +1,4 @@
+import { assetPath } from "@/lib/paths";
 import type { Book } from "@/types/book";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -26,7 +27,7 @@ export function SpineRail({ books, selectedId }: SpineRailProps) {
               )}
               style={{
                 backgroundColor: book.palette.band,
-                backgroundImage: `url(${book.coverImageUrl})`,
+                backgroundImage: `url(${assetPath(book.coverImageUrl)})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 color: book.palette.spineInk,

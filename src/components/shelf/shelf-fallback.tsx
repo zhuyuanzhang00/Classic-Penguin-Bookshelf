@@ -1,3 +1,4 @@
+import { assetPath } from "@/lib/paths";
 import { cn } from "@/lib/utils";
 import type { Book } from "@/types/book";
 import Link from "next/link";
@@ -39,7 +40,7 @@ export function ShelfFallback({ books, selectedId }: ShelfFallbackProps) {
                     )}
                     style={{
                       backgroundColor: book.palette.band,
-                      backgroundImage: `url(${book.coverImageUrl})`,
+                      backgroundImage: `url(${assetPath(book.coverImageUrl)})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       color: book.palette.spineInk,

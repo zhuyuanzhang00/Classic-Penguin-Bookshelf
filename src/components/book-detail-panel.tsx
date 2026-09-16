@@ -1,19 +1,46 @@
-import { saveCriticNotes } from "@/app/actions";
+"use client";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import type { Book } from "@/types/book";
+import { assetPath } from "@/lib/paths";
+import type { Book, CriticPatch } from "@/types/book";
 import { XIcon } from "lucide-react";
 import Link from "next/link";
+import { useState, type FormEvent } from "react";
 
 export function BookDetailPanel({
   book,
   saved = false,
+  onSave,
 }: {
   book: Book;
   saved?: boolean;
+  onSave: (id: number, patch: CriticPatch) => void;
 }) {
+  const [error, setError] = useState<string | null>(null);
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const criticRating = Number.parseInt(String(data.get("criticRating") ?? ""), 10);
+    const criticReview = String(data.get("criticReview") ?? "").trim();
+
+    if (!Number.isInteger(criticRating) || criticRating < 1 || criticRating > 5) {
+      setError("criticRating must be an integer from 1 to 5.");
+      return;
+    }
+    if (criticReview.length < 20 || criticReview.length > 4000) {
+      setError("criticReview must be between 20 and 4000 characters.");
+      return;
+    }
+
+    setError(null);
+    onSave(book.id, { criticRating, criticReview });
+  }
+
   return (
     <div className="fixed inset-0 z-50 flex justify-end">
       <Link href="/" className="absolute inset-0 bg-black/40" aria-label="Close book details" />
@@ -47,7 +74,7 @@ export function BookDetailPanel({
           <div className="mt-5 overflow-hidden rounded-sm border border-[color:var(--ink)]/10 bg-[color:var(--band)]/10">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={book.coverImageUrl}
+              src={assetPath(book.coverImageUrl)}
               alt={`Generated cover for ${book.title}`}
               className="mx-auto h-auto w-full max-w-[260px]"
             />
@@ -72,15 +99,20 @@ export function BookDetailPanel({
               Literary critic
             </h3>
             <p className="mt-1 text-sm text-[color:var(--ink)]/65">
-              Rating and review persist through this form and{" "}
-              <code className="text-xs">PATCH /api/books/{book.id}</code>.
+              Rating and review stay in this browser (localStorage) and merge
+              over the seed on every visit. GitHub Pages has no server.
             </p>
             {saved ? (
               <p className="mt-3 rounded-sm bg-[color:var(--band)]/10 px-3 py-2 text-sm text-[color:var(--ink)]">
-                Literary critic notes saved.
+                Literary critic notes saved in this browser.
               </p>
             ) : null}
-            <form action={saveCriticNotes} className="mt-4 space-y-4">
+            {error ? (
+              <p className="mt-3 rounded-sm border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+                {error}
+              </p>
+            ) : null}
+            <form key={book.id} onSubmit={handleSubmit} className="mt-4 space-y-4">
               <input type="hidden" name="id" value={book.id} />
               <div className="space-y-2">
                 <Label htmlFor="criticRating">Critic rating</Label>

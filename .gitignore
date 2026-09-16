@@ -43,5 +43,8 @@ next-env.d.ts
 # live critic store (recreated from seed if missing)
 /data/books.json
 
+# local GitHub Pages path preview
+/pages-preview
+
 # search scratch
 /agent-tools

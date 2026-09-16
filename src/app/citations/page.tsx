@@ -1,8 +1,6 @@
 import { Badge } from "@/components/ui/badge";
-import { getBooks } from "@/lib/store";
+import { SEED_BOOKS } from "@/data/seed";
 import type { Book } from "@/types/book";
-
-export const dynamic = "force-dynamic";
 
 function QuoteBlock({ book }: { book: Book }) {
   if (book.quoteStatus === "verified" && book.quoteText && book.quoteCitation) {
@@ -25,8 +23,8 @@ function QuoteBlock({ book }: { book: Book }) {
   );
 }
 
-export default async function CitationsPage() {
-  const books = await getBooks();
+export default function CitationsPage() {
+  const books = SEED_BOOKS;
   const verified = books.filter((book) => book.quoteStatus === "verified").length;
   const unavailable = books.length - verified;
 
