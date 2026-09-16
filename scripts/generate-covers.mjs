@@ -20,6 +20,23 @@ const books = [
   { id: 15, slug: "hunger", title: "Hunger", author: "Knut Hamsun", year: "1890", band: "#292524", paper: "#E7E5E4", ink: "#1C1917" },
   { id: 16, slug: "great-expectations", title: "Great Expectations", author: "Charles Dickens", year: "1861", band: "#EA580C", paper: "#F8EBD8", ink: "#1C1917" },
   { id: 17, slug: "the-little-prince", title: "The Little Prince", author: "Antoine de Saint-Exupéry", year: "1943", band: "#0369A1", paper: "#FEF3C7", ink: "#0C4A6E" },
+  { id: 18, slug: "the-invisible-man", title: "The Invisible Man", author: "H. G. Wells", year: "1897", band: "#1C1917", paper: "#F5F5F4", ink: "#0C0A09" },
+  { id: 19, slug: "little-women", title: "Little Women", author: "Louisa May Alcott", year: "1868", band: "#BE123C", paper: "#FDE8E8", ink: "#4C0519" },
+  { id: 20, slug: "the-waves", title: "The Waves", author: "Virginia Woolf", year: "1931", band: "#0E7490", paper: "#ECFEFF", ink: "#164E63" },
+  { id: 21, slug: "the-bodysurfers", title: "The Bodysurfers", author: "Robert Drewe", year: "1983", band: "#F59E0B", paper: "#FFFBEB", ink: "#78350F" },
+  { id: 22, slug: "dangerous-liaisons", title: "Dangerous Liaisons", author: "Pierre Choderlos de Laclos", year: "1782", band: "#A16207", paper: "#FEFCE8", ink: "#422006" },
+  { id: 23, slug: "brideshead-revisited", title: "Brideshead Revisited", author: "Evelyn Waugh", year: "1945", band: "#1E3A8A", paper: "#EEF2FF", ink: "#1E1B4B" },
+  { id: 24, slug: "breakfast-at-tiffanys", title: "Breakfast at Tiffany’s", author: "Truman Capote", year: "1958", band: "#0D9488", paper: "#CCFBF1", ink: "#134E4A" },
+  { id: 25, slug: "the-jungle-book", title: "The Jungle Book", author: "Rudyard Kipling", year: "1894", band: "#166534", paper: "#ECFCCB", ink: "#14532D" },
+  { id: 26, slug: "wuthering-heights", title: "Wuthering Heights", author: "Emily Brontë", year: "1847", band: "#44403C", paper: "#E7E5E4", ink: "#1C1917" },
+  { id: 27, slug: "holding-the-man", title: "Holding the Man", author: "Timothy Conigrave", year: "1995", band: "#CA8A04", paper: "#FEF9C3", ink: "#422006" },
+  { id: 28, slug: "of-mice-and-men", title: "Of Mice and Men", author: "John Steinbeck", year: "1937", band: "#7C2D12", paper: "#FFEDD5", ink: "#431407" },
+  { id: 29, slug: "love-in-the-time-of-cholera", title: "Love in the Time of Cholera", author: "Gabriel García Márquez", year: "1985", band: "#9F1239", paper: "#FFE4E6", ink: "#4C0519" },
+  { id: 30, slug: "treasure-island", title: "Treasure Island", author: "Robert Louis Stevenson", year: "1883", band: "#C2410C", paper: "#FFEDD5", ink: "#7C2D12" },
+  { id: 31, slug: "the-adventures-of-sherlock-holmes", title: "The Adventures of Sherlock Holmes", author: "Arthur Conan Doyle", year: "1892", band: "#57534E", paper: "#F5F5F4", ink: "#1C1917" },
+  { id: 32, slug: "one-flew-over-the-cuckoos-nest", title: "One Flew Over the Cuckoo’s Nest", author: "Ken Kesey", year: "1962", band: "#3F6212", paper: "#ECFCCB", ink: "#1A2E05" },
+  { id: 33, slug: "hamlet", title: "Hamlet", author: "William Shakespeare", year: "c.1600", band: "#171717", paper: "#FEF3C7", ink: "#1C1917" },
+  { id: 34, slug: "the-time-machine", title: "The Time Machine", author: "H. G. Wells", year: "1895", band: "#92400E", paper: "#FEF3C7", ink: "#451A03" },
 ];
 
 function wrap(text, max = 18) {
