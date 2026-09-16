@@ -37,7 +37,7 @@ The workflow in `.github/workflows/deploy-pages.yml` builds the static export an
 
 ## What you can do
 
-- Orbit the wooden case (drag / pinch). Click a spine — or the 2D rail on small screens — to open the detail panel (`/?book=`).
+- Orbit the wooden case (drag / pinch). Click a spine — or the 2D rail on small screens — to **pull the book out**, then open the detail panel (`/?book=`). Close the panel to slide it back into its slot.
 - Detail shows title, author, year, generated cover, imprint-exception and nonfiction badges when they apply, and the critic rating/review.
 - **Open book** reveals either a verified public-domain quote with an edition citation, or the failure note `No verified quote sourced yet.`
 - Edit `criticRating` (1–5) and `criticReview` in the panel. On GitHub Pages (and in the static export) those two fields persist in **localStorage** and merge over the seed. They do not sync across browsers or machines.
@@ -50,3 +50,7 @@ Quotes are a hard gate. Copyrighted titles are marked unavailable rather than pa
 ## Stack
 
 Next.js App Router static export, TypeScript, Tailwind, shadcn/ui, React Three Fiber, drei. Covers are deterministic SVGs (v1 placeholder generation), not licensed Penguin artwork.
+
+## 3D bookcase
+
+The case mesh is **Kenney’s Furniture Kit `bookcaseOpen`** ([kenney.nl](https://www.kenney.nl/assets/furniture-kit)), **CC0 / Public Domain**. Credit: Kenney (www.kenney.nl). The GLB is vendored in `public/models/` and also embedded so the static Pages build still loads it if a binary upload is skipped.

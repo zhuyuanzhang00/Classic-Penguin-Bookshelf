@@ -35,8 +35,8 @@ export function ShelfFallback({ books, selectedId }: ShelfFallbackProps) {
                     href={`/?book=${book.id}`}
                     title={`${book.title} — ${book.author}`}
                     className={cn(
-                      "flex origin-bottom items-end justify-center rounded-sm px-1 pb-2 pt-3 text-center transition-transform",
-                      selected ? "-translate-y-2 ring-2 ring-[#e34a1c]" : "hover:-translate-y-1",
+                      "flex origin-bottom items-end justify-center rounded-sm px-1 pb-2 pt-3 text-center transition-transform duration-500 ease-out",
+                      selected ? "-translate-y-5 scale-105 ring-2 ring-[#e34a1c]" : "hover:-translate-y-1",
                     )}
                     style={{
                       backgroundColor: book.palette.band,

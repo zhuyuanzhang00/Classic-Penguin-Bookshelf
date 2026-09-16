@@ -4,6 +4,7 @@ import { BookDetailPanel } from "@/components/book-detail-panel";
 import { ShelfStage } from "@/components/shelf-stage";
 import { SpineRail } from "@/components/spine-rail";
 import { mergeCriticFields, writeCriticPatch } from "@/lib/critic-storage";
+import { PULL_DURATION_MS } from "@/lib/shelf-case";
 import type { Book, CriticPatch } from "@/types/book";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -21,11 +22,22 @@ export function ShelfApp({ books: seed }: { books: Book[] }) {
   const saved = searchParams.get("saved") === "1";
   const [books, setBooks] = useState(seed);
   const [hydrated, setHydrated] = useState(false);
+  const [panelId, setPanelId] = useState<number | null>(null);
 
   useEffect(() => {
     setBooks(mergeCriticFields(seed));
     setHydrated(true);
   }, [seed]);
+
+  useEffect(() => {
+    if (selectedId == null) {
+      setPanelId(null);
+      return;
+    }
+    setPanelId(null);
+    const timer = window.setTimeout(() => setPanelId(selectedId), PULL_DURATION_MS);
+    return () => window.clearTimeout(timer);
+  }, [selectedId]);
 
   const selected = useMemo(
     () => books.find((book) => book.id === selectedId) ?? null,
@@ -42,7 +54,7 @@ export function ShelfApp({ books: seed }: { books: Book[] }) {
     <main className="flex min-h-0 flex-1 flex-col overflow-hidden">
       <ShelfStage books={books} selectedId={selectedId} />
       <SpineRail books={books} selectedId={selectedId} />
-      {selected && hydrated ? (
+      {selected && hydrated && panelId === selected.id ? (
         <BookDetailPanel
           key={selected.id}
           book={selected}

@@ -15,15 +15,26 @@ type ShelfCanvasProps = {
   onCreated?: () => void;
 };
 
-function Scene({ books, selectedId, onSelect }: Omit<ShelfCanvasProps, "onDeselect">) {
+function Scene({
+  books,
+  selectedId,
+  onSelect,
+}: Omit<ShelfCanvasProps, "onDeselect">) {
   const placed = layoutBooks(books);
 
   return (
     <>
       <color attach="background" args={["#140c09"]} />
-      <ambientLight intensity={0.7} />
-      <directionalLight position={[3.5, 6, 5]} intensity={1.35} color="#ffe1c2" />
-      <directionalLight position={[-4, 2, 3]} intensity={0.35} color="#ff7a3c" />
+      <ambientLight intensity={0.62} />
+      <directionalLight position={[4.2, 7.5, 6]} intensity={1.45} color="#ffe4c4" />
+      <directionalLight position={[-5, 2.2, 3.4]} intensity={0.32} color="#ff7a3c" />
+      <spotLight
+        position={[0, 6.5, 7]}
+        angle={0.55}
+        penumbra={0.6}
+        intensity={0.55}
+        color="#fff1dd"
+      />
       <Bookcase />
       {placed.map(({ book, position }) => (
         <BookMesh
@@ -37,12 +48,14 @@ function Scene({ books, selectedId, onSelect }: Omit<ShelfCanvasProps, "onDesele
       <OrbitControls
         makeDefault
         enablePan={false}
-        minDistance={6}
-        maxDistance={14}
-        minPolarAngle={Math.PI / 3.4}
-        maxPolarAngle={Math.PI / 2.05}
-        minAzimuthAngle={-0.55}
-        maxAzimuthAngle={0.55}
+        enableDamping
+        dampingFactor={0.08}
+        minDistance={11}
+        maxDistance={20}
+        minPolarAngle={Math.PI / 3.5}
+        maxPolarAngle={Math.PI / 2.02}
+        minAzimuthAngle={-0.5}
+        maxAzimuthAngle={0.5}
         target={[0, 0.15, 0]}
       />
     </>
@@ -59,12 +72,12 @@ export default function ShelfCanvas({
   return (
     <Canvas
       className="h-full w-full"
-      camera={{ position: [0, 0.55, 8.4], fov: 38, near: 0.1, far: 40 }}
+      camera={{ position: [0, 0.4, 15.2], fov: 32, near: 0.1, far: 60 }}
       dpr={1}
       onCreated={() => onCreated?.()}
       onPointerMissed={onDeselect}
       gl={{
-        antialias: false,
+        antialias: true,
         alpha: false,
         powerPreference: "default",
         failIfMajorPerformanceCaveat: false,

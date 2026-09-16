@@ -20,9 +20,9 @@ export function SpineRail({ books, selectedId }: SpineRailProps) {
               href={`/?book=${book.id}`}
               title={`${book.title} — ${book.author}`}
               className={cn(
-                "flex h-28 min-w-8 shrink-0 flex-col items-center justify-end rounded-sm px-1 pb-2 pt-3 text-center transition-transform",
+                "flex h-28 min-w-8 shrink-0 flex-col items-center justify-end rounded-sm px-1 pb-2 pt-3 text-center transition-transform duration-500 ease-out",
                 selected
-                  ? "translate-y-[-4px] ring-2 ring-[color:var(--band)]"
+                  ? "-translate-y-3 scale-105 ring-2 ring-[color:var(--band)]"
                   : "hover:-translate-y-0.5",
               )}
               style={{

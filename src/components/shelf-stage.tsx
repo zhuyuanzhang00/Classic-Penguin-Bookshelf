@@ -69,7 +69,7 @@ export function ShelfStage({
             />
           </ShelfErrorBoundary>
           <p className="pointer-events-none absolute bottom-3 left-1/2 hidden -translate-x-1/2 text-[11px] uppercase tracking-[0.28em] text-[#f4e6d0]/70 md:block">
-            Drag to orbit · click a spine
+            Drag to orbit · click a spine to pull it out
           </p>
         </div>
       ) : null}
