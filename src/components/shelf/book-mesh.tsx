@@ -4,7 +4,11 @@ import { useCursor } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import { makeSpineTexture, spineCloth } from "@/components/shelf/book-textures";
+import {
+  makePageTexture,
+  makeSpineTexture,
+  spineCloth,
+} from "@/components/shelf/book-textures";
 import { assetPath } from "@/lib/paths";
 import {
   CASE_CLEARANCE,
@@ -32,9 +36,8 @@ type BookMeshProps = {
   onSelect: (book: Book) => void;
 };
 
-const FRONT_OPEN = Math.PI * 0.82;
-const BACK_OPEN = Math.PI * 0.22;
-const PAGE_FAN = 0.16;
+/** Almost 180° so covers lie side by side with insides toward the camera. */
+const FRONT_OPEN = Math.PI * 0.98;
 
 function coverThickness(book: Book) {
   return Math.max(0.018, Math.min(0.038, book.thickness * 0.17));
@@ -44,10 +47,9 @@ export function BookMesh({ book, position, selected, onSelect }: BookMeshProps) 
   const root = useRef<THREE.Group>(null);
   const turnGroup = useRef<THREE.Group>(null);
   const frontHinge = useRef<THREE.Group>(null);
-  const backHinge = useRef<THREE.Group>(null);
-  const pageLeaves = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
   const [spineMap, setSpineMap] = useState<THREE.CanvasTexture | null>(null);
+  const [pageMap, setPageMap] = useState<THREE.CanvasTexture | null>(null);
   const [coverMap, setCoverMap] = useState<THREE.Texture | null>(null);
   const pull = useRef(0);
   const turn = useRef(0);
@@ -61,6 +63,7 @@ export function BookMesh({ book, position, selected, onSelect }: BookMeshProps) 
   const coverT = coverThickness(book);
   const pagesT = Math.max(0.05, book.thickness - coverT * 2);
   const pullDist = pullDistanceFor(book.depth);
+  const spineZ = book.depth / 2;
   useCursor(hovered || selected);
 
   useEffect(() => {
@@ -71,6 +74,14 @@ export function BookMesh({ book, position, selected, onSelect }: BookMeshProps) 
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [book.id, book.title, book.author, book.palette.band]);
+
+  useEffect(() => {
+    const texture = makePageTexture();
+    setPageMap(texture);
+    return () => {
+      texture.dispose();
+    };
+  }, []);
 
   useEffect(() => {
     const loader = new THREE.TextureLoader();
@@ -101,7 +112,7 @@ export function BookMesh({ book, position, selected, onSelect }: BookMeshProps) 
   }, [selected]);
 
   useFrame(() => {
-    if (!root.current || !turnGroup.current || !frontHinge.current || !backHinge.current) {
+    if (!root.current || !turnGroup.current || !frontHinge.current) {
       return;
     }
     const elapsed = performance.now() - startedAt.current;
@@ -144,19 +155,16 @@ export function BookMesh({ book, position, selected, onSelect }: BookMeshProps) 
     }
 
     root.current.position.set(position[0], y, z);
+    // Face the jacket toward the camera; spine ends on the viewer's left.
     turnGroup.current.rotation.y = -turn.current * (Math.PI / 2);
+    // Hinge at the spine (+Z). Negative Y rotation swings the fore-edge
+    // outward so the covers finish side by side, insides facing the camera.
     frontHinge.current.rotation.y = -spread.current * FRONT_OPEN;
-    backHinge.current.rotation.y = spread.current * BACK_OPEN;
-    if (pageLeaves.current) {
-      pageLeaves.current.children.forEach((leaf, index) => {
-        leaf.rotation.y = (index - 1) * spread.current * PAGE_FAN;
-      });
-    }
   });
 
-  const pageW = pagesT * 0.92;
   const pageH = book.height * 0.96;
-  const pageD = book.depth * 0.92;
+  const pageD = book.depth * 0.9;
+  const jacketColor = coverMap ? "#ffffff" : book.palette.band;
 
   return (
     <group
@@ -176,78 +184,120 @@ export function BookMesh({ book, position, selected, onSelect }: BookMeshProps) 
       onPointerOut={() => setHovered(false)}
     >
       <group ref={turnGroup}>
-        <group ref={backHinge} position={[-pagesT / 2, 0, 0]}>
-          <mesh position={[-coverT / 2, 0, 0]} castShadow>
-            <boxGeometry args={[coverT, book.height, book.depth]} />
-            <meshStandardMaterial
-              attach="material-0"
-              color={book.palette.paper}
-              roughness={0.7}
-            />
-            <meshStandardMaterial attach="material-1" color={cloth} roughness={0.62} />
-            <meshStandardMaterial attach="material-2" color="#efe4cc" roughness={0.9} />
-            <meshStandardMaterial attach="material-3" color="#e4d4b4" roughness={0.9} />
-            <meshStandardMaterial attach="material-4" color={cloth} roughness={0.6} />
-            <meshStandardMaterial attach="material-5" color="#f0e6d2" roughness={0.88} />
-          </mesh>
-        </group>
-
-        <group ref={pageLeaves}>
-          {[-0.28, 0, 0.28].map((offset, index) => (
-            <mesh key={index} position={[offset * pagesT * 0.15, 0, 0]}>
-              <boxGeometry args={[pageW / 3, pageH, pageD]} />
-              <meshStandardMaterial color="#f7edd8" roughness={0.92} />
-            </mesh>
-          ))}
-        </group>
-
-        <group ref={frontHinge} position={[pagesT / 2, 0, 0]}>
-          <mesh position={[coverT / 2, 0, 0]} castShadow>
-            <boxGeometry args={[coverT, book.height, book.depth]} />
-            <meshStandardMaterial
-              attach="material-0"
-              color={book.palette.band}
-              map={coverMap}
-              roughness={0.48}
-            />
-            <meshStandardMaterial
-              attach="material-1"
-              color={book.palette.paper}
-              roughness={0.72}
-            />
-            <meshStandardMaterial attach="material-2" color="#efe4cc" roughness={0.9} />
-            <meshStandardMaterial attach="material-3" color="#e4d4b4" roughness={0.9} />
-            <meshStandardMaterial attach="material-4" color={cloth} roughness={0.6} />
-            <meshStandardMaterial attach="material-5" color="#f0e6d2" roughness={0.88} />
-          </mesh>
-          <mesh
-            position={[coverT + 0.0015, 0, 0]}
-            rotation={[0, Math.PI / 2, 0]}
-          >
-            <planeGeometry args={[book.depth * 0.96, book.height * 0.96]} />
-            <meshStandardMaterial
-              map={coverMap}
-              color={book.palette.band}
-              roughness={0.46}
-              metalness={0.02}
-            />
-          </mesh>
-        </group>
-
-        <mesh position={[0, 0, book.depth / 2 - 0.014]}>
-          <boxGeometry args={[book.thickness * 0.98, book.height, 0.028]} />
-          <meshStandardMaterial color={cloth} roughness={0.5} />
+        {/* Back cover — stays put; after the turn its inside faces the camera through the pages. */}
+        <mesh position={[-(pagesT / 2 + coverT / 2), 0, 0]} castShadow>
+          <boxGeometry args={[coverT, book.height, book.depth]} />
+          <meshStandardMaterial
+            attach="material-0"
+            color="#f4ead4"
+            roughness={0.88}
+          />
+          <meshStandardMaterial
+            attach="material-1"
+            color={cloth}
+            roughness={0.58}
+            metalness={0.02}
+          />
+          <meshStandardMaterial attach="material-2" color="#efe4cc" roughness={0.9} />
+          <meshStandardMaterial attach="material-3" color="#e4d4b4" roughness={0.9} />
+          <meshStandardMaterial
+            attach="material-4"
+            color={cloth}
+            roughness={0.55}
+            metalness={0.02}
+          />
+          <meshStandardMaterial attach="material-5" color="#f0e6d2" roughness={0.88} />
         </mesh>
-        <mesh position={[0, 0, book.depth / 2 + 0.001]}>
+
+        {/* Page block: +X is the right-hand page of the open spread. */}
+        <mesh>
+          <boxGeometry args={[pagesT, pageH, pageD]} />
+          <meshStandardMaterial color="#f7f0de" roughness={0.92} />
+        </mesh>
+        {pageMap ? (
+          <mesh position={[pagesT / 2 + 0.0015, 0, 0]} rotation={[0, Math.PI / 2, 0]}>
+            <planeGeometry args={[book.depth * 0.9, book.height * 0.92]} />
+            <meshStandardMaterial
+              map={pageMap}
+              color="#fffaf0"
+              roughness={0.9}
+              metalness={0}
+            />
+          </mesh>
+        ) : null}
+
+        {/* Spine strip + lettering (visible on the shelf; gutter when open). */}
+        <mesh position={[0, 0, spineZ - 0.014]} castShadow>
+          <boxGeometry args={[book.thickness * 0.98, book.height, 0.028]} />
+          <meshStandardMaterial
+            color={cloth}
+            roughness={0.52}
+            metalness={0.02}
+            envMapIntensity={0.3}
+          />
+        </mesh>
+        <mesh position={[0, 0, spineZ + 0.001]}>
           <planeGeometry args={[book.thickness * 0.94, book.height * 0.97]} />
           <meshStandardMaterial
             map={spineMap}
-            color={cloth}
-            roughness={0.42}
-            emissive={selected ? cloth : "#000000"}
-            emissiveIntensity={selected ? 0.1 : 0}
+            color="#ffffff"
+            roughness={0.46}
+            metalness={0.01}
+            emissive="#1a120c"
+            emissiveIntensity={0.04}
           />
         </mesh>
+
+        {/* Front cover hinged at the spine edge (local +Z). */}
+        <group ref={frontHinge} position={[pagesT / 2, 0, spineZ]}>
+          <mesh position={[coverT / 2, 0, -book.depth / 2]} castShadow>
+            <boxGeometry args={[coverT, book.height, book.depth]} />
+            <meshStandardMaterial
+              attach="material-0"
+              color={jacketColor}
+              map={coverMap}
+              roughness={0.48}
+              metalness={0.02}
+            />
+            <meshStandardMaterial
+              attach="material-1"
+              color="#f4ead4"
+              roughness={0.86}
+            />
+            <meshStandardMaterial attach="material-2" color="#efe4cc" roughness={0.9} />
+            <meshStandardMaterial attach="material-3" color="#e4d4b4" roughness={0.9} />
+            <meshStandardMaterial attach="material-4" color={cloth} roughness={0.55} />
+            <meshStandardMaterial attach="material-5" color="#f0e6d2" roughness={0.88} />
+          </mesh>
+          {coverMap ? (
+            <mesh
+              position={[coverT + 0.0015, 0, -book.depth / 2]}
+              rotation={[0, Math.PI / 2, 0]}
+            >
+              <planeGeometry args={[book.depth * 0.96, book.height * 0.96]} />
+              <meshStandardMaterial
+                map={coverMap}
+                color="#ffffff"
+                roughness={0.46}
+                metalness={0.02}
+              />
+            </mesh>
+          ) : null}
+          {pageMap ? (
+            <mesh
+              position={[-0.0015, 0, -book.depth / 2]}
+              rotation={[0, -Math.PI / 2, 0]}
+            >
+              <planeGeometry args={[book.depth * 0.9, book.height * 0.92]} />
+              <meshStandardMaterial
+                map={pageMap}
+                color="#fffaf0"
+                roughness={0.9}
+                metalness={0}
+              />
+            </mesh>
+          ) : null}
+        </group>
       </group>
     </group>
   );
