@@ -9,9 +9,9 @@ type ShelfFallbackProps = {
 };
 
 const rows = [
-  [0, 6],
-  [6, 12],
-  [12, 17],
+  [0, 12],
+  [12, 24],
+  [24, 34],
 ] as const;
 
 export function ShelfFallback({ books, selectedId }: ShelfFallbackProps) {

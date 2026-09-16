@@ -74,6 +74,9 @@ export default function CitationsPage() {
                 {book.isNonfiction ? (
                   <Badge variant="secondary">Nonfiction</Badge>
                 ) : null}
+                {book.isDrama ? (
+                  <Badge variant="secondary">Drama</Badge>
+                ) : null}
                 {book.imprintException ? (
                   <Badge variant="outline">Imprint exception</Badge>
                 ) : null}
