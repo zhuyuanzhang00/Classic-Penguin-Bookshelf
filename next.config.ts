@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
   basePath: basePath || undefined,
   assetPrefix: basePath || undefined,
   transpilePackages: ["three"],
+  allowedDevOrigins: ["127.0.0.1", "localhost"],
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
   },
