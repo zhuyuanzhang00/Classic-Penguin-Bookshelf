@@ -8,7 +8,8 @@ import { assetPath } from "@/lib/paths";
 import type { Book, CriticPatch } from "@/types/book";
 import { XIcon } from "lucide-react";
 import Link from "next/link";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import { createPortal } from "react-dom";
 
 export function BookDetailPanel({
   book,
@@ -20,6 +21,11 @@ export function BookDetailPanel({
   onSave: (id: number, patch: CriticPatch) => void;
 }) {
   const [error, setError] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -41,8 +47,11 @@ export function BookDetailPanel({
     onSave(book.id, { criticRating, criticReview });
   }
 
-  return (
-    <div className="fixed inset-0 z-50 flex justify-end">
+  const panel = (
+    <div
+      data-book-detail-panel=""
+      className="fixed inset-0 z-[200] flex justify-end"
+    >
       <Link href="/" className="absolute inset-0 bg-black/40" aria-label="Close book details" />
       <aside
         role="dialog"
@@ -182,4 +191,7 @@ export function BookDetailPanel({
       </aside>
     </div>
   );
+
+  if (!mounted) return null;
+  return createPortal(panel, document.body);
 }
