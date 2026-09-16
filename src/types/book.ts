@@ -19,6 +19,7 @@ export type Book = {
   imprintException: boolean;
   imprintExceptionNote: string | null;
   isNonfiction: boolean;
+  isDrama?: boolean;
   quoteStatus: QuoteStatus;
   quoteText: string | null;
   quoteCitation: string | null;

@@ -53,8 +53,10 @@ jobs:
             echo "Lockfile missing or invalid; using npm install"
             npm install
           fi
-      - name: Build static export
-        run: npm run build
+      - name: Generate covers and build static export
+        run: |
+          npm run covers
+          npm run build
         env:
           GITHUB_PAGES: "true"
       - name: Upload Pages artifact

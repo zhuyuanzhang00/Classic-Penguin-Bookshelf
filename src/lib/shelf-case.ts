@@ -4,7 +4,7 @@ export const CASE_SCALE = 1.22;
 
 export const KENNEY_CENTER = { x: -2, y: 4.4, z: 1.25 };
 
-/** Usable plank tops in Kenney space, top → bottom rows (ids 1–6, 7–12, 13–17). */
+/** Usable plank tops in Kenney space, top → bottom rows (ids 1–12, 13–24, 25–34). */
 export const KENNEY_PLANK_TOPS = [6.1, 3.7, 1.3] as const;
 
 /** Underside of the plank above each row (opening height = 2.1 native). */
