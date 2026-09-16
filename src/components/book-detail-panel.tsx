@@ -13,10 +13,12 @@ import { useState, type FormEvent } from "react";
 export function BookDetailPanel({
   book,
   saved = false,
+  revealed = true,
   onSave,
 }: {
   book: Book;
   saved?: boolean;
+  revealed?: boolean;
   onSave: (id: number, patch: CriticPatch) => void;
 }) {
   const [error, setError] = useState<string | null>(null);
@@ -45,7 +47,11 @@ export function BookDetailPanel({
     <div
       data-book-detail-panel=""
       data-book-id={book.id}
-      className="fixed inset-0 z-[200] flex justify-end"
+      data-panel-revealed={revealed ? "true" : "false"}
+      aria-hidden={!revealed}
+      className={`fixed inset-0 z-[200] flex justify-end transition-opacity duration-500 ${
+        revealed ? "opacity-100" : "pointer-events-none opacity-0"
+      }`}
       style={{ zIndex: 200 }}
     >
       <Link href="/" className="absolute inset-0 bg-black/40" aria-label="Close book details" />
@@ -110,6 +116,11 @@ export function BookDetailPanel({
               Rating and review stay in this browser (localStorage) and merge
               over the seed on every visit. GitHub Pages has no server.
             </p>
+            {book.criticRating == null ? (
+              <p className="mt-3 rounded-sm border border-dashed border-[color:var(--ink)]/20 bg-white/50 px-3 py-2 text-sm text-[color:var(--ink)]/80">
+                Awaiting Literary Critic — no rating yet.
+              </p>
+            ) : null}
             {saved ? (
               <p className="mt-3 rounded-sm bg-[color:var(--band)]/10 px-3 py-2 text-sm text-[color:var(--ink)]">
                 Literary critic notes saved in this browser.
