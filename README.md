@@ -1,6 +1,6 @@
 # The Orange Band
 
-A Penguin Classics–style **3D bookshelf**: thirty-four titles in a fixed order, camera controls, a live literary-critic panel, and a hard-gated `/citations` page that never invents quotes.
+A Penguin Classics–style **3D bookshelf**: thirty-five titles in a fixed order, camera controls, a live literary-critic panel, and a hard-gated `/citations` page that never invents quotes.
 
 Live site (GitHub Pages): [https://zhuyuanzhang00.github.io/Classic-Penguin-Bookshelf/](https://zhuyuanzhang00.github.io/Classic-Penguin-Bookshelf/)
 
@@ -37,11 +37,15 @@ The workflow in `.github/workflows/deploy-pages.yml` builds the static export an
 
 ## What you can do
 
-- Orbit the wooden case (drag / pinch). Click a spine — or the 2D rail on small screens — to **pull the book out**, then open the detail panel (`/?book=`). Close the panel to slide it back into its slot.
-- Detail shows title, author, year, generated cover, imprint-exception, nonfiction, and drama badges when they apply, and the critic rating/review. *Hamlet* is flagged as drama, not a novel.
-- **Open book** reveals either a verified public-domain quote with an edition citation, or the failure note `No verified quote sourced yet.`
-- Edit `criticRating` (1–5) and `criticReview` in the panel. On GitHub Pages (and in the static export) those two fields persist in **localStorage** and merge over the seed. They do not sync across browsers or machines.
-- `/citations` lists all 34 titles in shelf order with quote status, text, citation, or failure note.
+- Orbit the wooden case (drag / pinch). Click a spine — or the 2D rail — to **pull the book clear of the case, turn and open it**, then show the detail panel (`/?book=`). Close the panel to **close the covers and slide the book back** into its slot. No teleport; easing is cubic/quart; the volume stays in front of the wood.
+- Detail shows title, author, year, generated cover, imprint-exception, nonfiction, and drama badges when they apply, and the critic rating/review. *Hamlet* and *Journey’s End* are flagged as drama, not novels.
+- **Open book** (in the panel) reveals either a verified public-domain quote with an edition citation, or the failure note `No verified quote sourced yet.`
+- Edit `criticRating` (1–5) and `criticReview` in the panel. On GitHub Pages those two fields persist in **localStorage**. *Journey’s End* ships with no rating and the placeholder `Awaiting Literary Critic.`
+- `/citations` lists all 35 titles in shelf order with quote status, text, citation, or failure note.
+
+## Covers and spines
+
+Every cover uses the same Penguin-band layout as *The Little Prince*: cream cartouche, oval mark, CLASSICS / year / title / author / A SHELF EDITION. Band color varies per title. Spines are dark cloth with **large white lettering**.
 
 ## Quote policy
 
